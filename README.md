@@ -1,7 +1,16 @@
-# Create Responsive Sidebar Menu | Sidebar Bootstrap 5
+# Project Title
 
-Create a straightforward sidebar with Bootstrap 5 that features a nested dropdown link. This design is mobile-friendly, easy to code, and can be scaled effortlessly for different projects.
+## Description
 
-[![youtube](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@codzsword)
+A brief description of what this project does and who it's for.
 
-![Logo](https://raw.githubusercontent.com/codzsword/sidebar-bootstrap/main/Sidebar-With-Bootstrap-Demo.png)
+## Installation
+
+Provide step by step series of examples and explanations about how to get a development environment running.
+
+```bash
+git clone <repository>
+cd <repository>
+pip install -r requirements.txtpython manage.py makemigrations
+python manage.py migratepython manage.py runserverpython manage.py test
+```
