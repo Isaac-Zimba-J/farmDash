@@ -13,8 +13,8 @@ app.autodiscover_tasks()
 
 
 app.conf.beat_schedule = {
-    'fetch-data-every-5-seconds': {
+    'fetch-data-every-1-seconds': {
         'task': 'main.tasks.fetch_data_from_firebase',
-        'schedule': 5.0,  # Every 5 seconds
+        'schedule': 1.0,  # Every 1 seconds
     },
 }

@@ -20,7 +20,7 @@ db = firebase.database()
 
 
 # Constants
-SOME_HIGH_CONDUCTIVITY_LEVEL = 100.0  # Example high level for conductivity
+SOME_HIGH_CONDUCTIVITY_LEVEL = 10  # Example high level for conductivity
 
 
 @shared_task

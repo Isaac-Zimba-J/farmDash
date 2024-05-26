@@ -15,8 +15,99 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <!-- Add Animal link styled as a button -->
-      <a class="btn btn-outline-success my-2 my-sm-0" href="#">Add Animal</a>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#addAnimalModal"
+      >
+        Add Animal
+      </button>
+
+      <div
+        class="modal fade"
+        id="addAnimalModal"
+        tabindex="-1"
+        aria-labelledby="addAnimalModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addAnimalModalLabel">Add Animal</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="addAnimalForm">
+                <div class="form-group">
+                  <label for="animal-id" class="col-form-label"
+                    >Animal ID:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="animal-id"
+                    name="animal_id"
+                    required
+                  />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="saveAnimalButton"
+              >
+                Save Animal
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
+{% block extra_js_scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include jQuery -->
+<script>
+  $(document).ready(function () {
+    $("#saveAnimalButton").click(function () {
+      var formData = $("#addAnimalForm").serialize(); // Serialize form data
+
+      $.ajax({
+        url: '{% url "add_animal" %}', // URL to your Django view
+        method: "POST",
+        data: formData,
+        success: function (response) {
+          if (response.success) {
+            alert("Animal added successfully!");
+            $("#addAnimalModal").modal("hide"); // Hide the modal
+            // Optionally, update the UI to show the new animal
+          } else {
+            alert("Failed to add animal.");
+          }
+        },
+        error: function (xhr, status, error) {
+          console.error("Error adding animal:", error);
+        },
+      });
+    });
+  });
+</script>
+{% endblock %}

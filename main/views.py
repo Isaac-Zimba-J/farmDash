@@ -22,40 +22,40 @@ firebaseConfig = {
 firebase = pyrebase.initialize_app(firebaseConfig)
 db = firebase.database()
 
-# # Constants
-# SOME_HIGH_CONDUCTIVITY_LEVEL = 100.0  # Example high level for conductivity
+# Constants
+SOME_HIGH_CONDUCTIVITY_LEVEL = 10.0  # Example high level for conductivity
 
 def index(request):
     # Fetch data from Firestore
   
-    # volume_data = SensorData.objects.latest('volume')
-    # conductivity_data =SensorData.objects.latest('conductivity')
-    # timestamp_data = SensorData.objects.latest('timestamp')
+    volume_data = SensorData.objects.latest('volume')
+    conductivity_data =SensorData.objects.latest('conductivity')
+    timestamp_data = SensorData.objects.latest('timestamp')
 
-    # volume = volume_data.volume
-    # conductivity = conductivity_data.conductivity
-    # timestamp = timestamp_data.timestamp
+    volume = volume_data.volume
+    conductivity = conductivity_data.conductivity
+    timestamp = timestamp_data.timestamp
 
-    # flagged_message = ""
+    flagged_message = ""
 
  
-    # if volume is not None and conductivity is not None:
-    #     data = SensorData(
-    #         volume = volume,
-    #         conductivity = conductivity,
-    #         timestamp = timestamp
-    #     )
-    #     data.save()
+    if volume is not None and conductivity is not None:
+        data = SensorData(
+            volume = volume,
+            conductivity = conductivity,
+            timestamp = timestamp
+        )
+        # ÷data.save()
 
-    #     # Check conductivity level and create flagged message if needed
-    #     if conductivity >= SOME_HIGH_CONDUCTIVITY_LEVEL:
-    #         flagged_message = f"Potential mastitis"
-    #         flagged = FlaggedMessage(
-    #             sensor_data=data,
-    #             message=flagged_message,
-    #             timestamp=timezone.now()
-    #         )
-    #         flagged.save()
+        # Check conductivity level and create flagged message if needed
+        if conductivity >= SOME_HIGH_CONDUCTIVITY_LEVEL:
+            flagged_message = f"Potential mastitis6"
+            flagged = FlaggedMessage(
+                sensor_data=data,
+                message=flagged_message,
+                timestamp=timezone.now()
+            )
+            # flagged.save()
 
     return render(request, 'index.html')
 
