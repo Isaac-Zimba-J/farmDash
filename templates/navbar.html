@@ -1,113 +1,37 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"
-    >Farm Manager Dashboard<span class="sr-only">(current)</span></a
-  >
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-toggle="modal"
-        data-target="#addAnimalModal"
-      >
-        Add Animal
-      </button>
+{% load static %}
 
-      <div
-        class="modal fade"
-        id="addAnimalModal"
-        tabindex="-1"
-        aria-labelledby="addAnimalModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="addAnimalModalLabel">Add Animal</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form id="addAnimalForm">
-                <div class="form-group">
-                  <label for="animal-id" class="col-form-label"
-                    >Animal ID:</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="animal-id"
-                    name="animal_id"
-                    required
-                  />
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                id="saveAnimalButton"
-              >
-                Save Animal
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
-{% block extra_js_scripts %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Include jQuery -->
-<script>
-  $(document).ready(function () {
-    $("#saveAnimalButton").click(function () {
-      var formData = $("#addAnimalForm").serialize(); // Serialize form data
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidebar With Bootstrap</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
 
-      $.ajax({
-        url: '{% url "add_animal" %}', // URL to your Django view
-        method: "POST",
-        data: formData,
-        success: function (response) {
-          if (response.success) {
-            alert("Animal added successfully!");
-            $("#addAnimalModal").modal("hide"); // Hide the modal
-            // Optionally, update the UI to show the new animal
-          } else {
-            alert("Failed to add animal.");
-          }
-        },
-        error: function (xhr, status, error) {
-          console.error("Error adding animal:", error);
-        },
-      });
-    });
-  });
-</script>
-{% endblock %}
+    
+
+  </head>
+
+  <body>
+
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'main/js/script.js' %}"></script>
+
+    {% block extra_js_scripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    {% endblock %}
+  </body>
+</

@@ -4,57 +4,160 @@
 {% block title %}HOME{% endblock %}
 
 {% include 'navbar.html' %}
-
+<style>
+    .modal-button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+    .modal-button span {
+        margin-left: 5px;
+    }
+</style>
 {% block content %}
-<div class="container">
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-4 mb-3">
-                <div class="card border-success" style="max-width: 100%;">
-                    <div class="card-header">ID: 9836</div>
-                    <div class="card-body text-success">
-                        <p>
-                            <h6 class="card-title">Volume: <span id="volume1">{{ volume }}</span> ml</h6>
-                            <h6 class="card-title">Conductivity: <span id="conductivity1">{{ conductivity }}</span> mS/cm</h6>
-                        </p>
-                        <footer class="blockquote-footer">
-                            <cite title="Source Title"><span id="flagged_message1">{{ flagged_message|default:"All good" }}</span></cite>
-                        </footer>
-                    </div>
-                </div>
+   <!-- Navbar with Modal -->
+     
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div
+          class="modal fade"
+          id="addAnimalModal"
+          tabindex="-1"
+          aria-labelledby="addAnimalModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addAnimalModalLabel">Add Animal</h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="addAnimalForm">
+                  <div class="form-group">
+                    <label for="animal-id" class="col-form-label">Animal ID:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="animal-id"
+                      name="animal_id"
+                      required
+                    />
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="saveAnimalButton"
+                >
+                  Save Animal
+                </button>
+              </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-4 mb-3">
-                <div class="card border-primary" style="max-width: 100%;">
-                    <div class="card-header">ID: 9836</div>
-                    <div class="card-body text-primary">
-                        <p>
-                            <h6 class="card-title">Volume: <span id="volume1">23</span> ml</h6>
-                            <h6 class="card-title">Conductivity: <span id="conductivity1">32</span> mS/cm</h6>
-                        </p>
-                        <footer class="blockquote-footer">
-                            <cite title="Source Title"><span id="flagged_message1">{{ flagged_message|default:"All good" }}</span></cite>
-                        </footer>
+          </div>
+        </div>
+    </div>
+  </nav>
+<div class="wrapper">
+    <aside id="sidebar">
+      <div class="d-flex">
+        <button class="toggle-btn" type="button">
+          <i class="lni lni-grid-alt"></i>
+        </button>
+        <div class="sidebar-logo">
+          <a href="#">FarmDash</a>
+        </div>
+      </div>
+      <ul class="sidebar-nav">
+        <!-- Add Animal Button in Sidebar -->
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link" data-toggle="modal"
+          data-target="#addAnimalModal">
+            <i class="lni lni-agenda"></i>
+            <span>Task</span>
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <a href="#" class="sidebar-link">
+          <i class="lni lni-exit"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </aside>
+    <div class="main p-3">
+          <div class="container">
+         
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="card border-success" style="max-width: 100%;">
+                            <div class="card-header">ID: 986</div>
+                            <div class="card-body text-success">
+                                <p>
+                                    <h6 class="card-title">Volume: <span id="volume1">{{ volume }}</span> ml</h6>
+                                    <h6 class="card-title">Conductivity: <span id="conductivity1">{{ conductivity }}</span> mS/cm</h6>
+                                </p>
+                                <footer class="blockquote-footer">
+                                    <cite title="Source Title"><span id="flagged_message1">{{ flagged_message|default:"All good" }}</span></cite>
+                                </footer>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 mb-3">
-                <div class="card border-danger" style="max-width: 100%;">
-                    <div class="card-header">ID: 9836</div>
-                    <div class="card-body text-danger">
-                        <p>
-                            <h6 class="card-title">Volume: <span id="volume1">6781</span> ml</h6>
-                            <h6 class="card-title">Conductivity: <span id="conductivity1">098</span> mS/cm</h6>
-                        </p>
-                        <footer class="blockquote-footer">
-                            <cite title="Source Title"><span id="flagged_message1">{{ flagged_message|default:"All good" }}</span></cite>
-                        </footer>
+                    {% for animal in animal_data %}
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="card border-primary" style="max-width: 100%;">
+                            <div class="card-header">ID: {{ animal.animal_id }} </div>
+                            <div class="card-body text-primary">
+                                <p>
+                                    <h6 class="card-title">Volume: <span id="volume{{ forloop.counter }}">{{ animal.volume }}</span> ml</h6>
+                                    <h6 class="card-title">Conductivity: <span id="conductivity{{ forloop.counter }}">{{ animal.conductivity }}</span>mS/cm</h6>
+                                </p>
+                                <footer class="blockquote-footer">
+                                    <cite title="Source Title"><span id="flagged_message1">{{ flagged_message|default:"All good" }}</span></cite>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="card border-danger" style="max-width: 100%;">
+                            <div class="card-header">ID: 099</div>
+                            <div class="card-body text-danger">
+                                <p>
+                                    <h6 class="card-title">Volume: <span id="volume1">6781</span> ml</h6>
+                                    <h6 class="card-title">Conductivity: <span id="conductivity1">098</span> mS/cm</h6>
+                                </p>
+                                <footer class="blockquote-footer">
+                                    <cite title="Source Title"><span id="flagged_message1">{{ flagged_message|default:"All good" }}</span></cite>
+                                </footer>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+  </div>
+
+
 {% endblock %}
 
 {% block extra_js_scripts %}
@@ -84,4 +187,29 @@
         setInterval(fetchDataAndUpdateUI, 2000);
     });
 </script>
+<script>
+    $(document).ready(function () {
+      $("#saveAnimalButton").click(function () {
+        var formData = $("#addAnimalForm").serialize(); // Serialize form data
+        formData += "&csrfmiddlewaretoken={{ csrf_token }}"; // Add CSRF token
+
+        $.ajax({
+          url: '{% url "add_animal" %}', // URL to your Django view
+          method: "POST",
+          data: formData,
+          success: function (response) {
+            if (response.success) {
+              alert("Animal added successfully!");
+              $("#addAnimalModal").modal("hide"); // Hide the modal
+            } else {
+              alert("Failed to add animal.");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error adding animal:", error);
+          },
+        });
+      });
+    });
+  </script>
 {% endblock %}

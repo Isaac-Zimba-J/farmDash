@@ -14,3 +14,12 @@ class FlaggedMessage(models.Model):
 
     def __str__(self):
         return f"{self.message}"
+
+class Animal(models.Model):
+    animal_id = models.CharField(max_length=100, unique=True)
+    volume = models.FloatField(default=45.0)
+    conductivity = models.FloatField(default=45.0)
+    timestamp = models.DateTimeField()
+
+    def __str__(self):
+        return self.animal_id

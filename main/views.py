@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import pyrebase
 from django.utils import timezone
-from .models import SensorData, FlaggedMessage
+from .models import SensorData, FlaggedMessage, Animal
 from datetime import datetime
 
 
@@ -38,6 +38,9 @@ def index(request):
 
     flagged_message = ""
 
+    # show animal data
+    animal_data = Animal.objects.all()
+
  
     if volume is not None and conductivity is not None:
         data = SensorData(
@@ -57,7 +60,10 @@ def index(request):
             )
             # flagged.save()
 
-    return render(request, 'index.html')
+    context = {
+        "animal_data": animal_data,
+    }
+    return render(request, 'index.html',context)
 
 
 
@@ -75,3 +81,22 @@ def fetch_data(request):
     }
 
     return JsonResponse(data)
+
+
+
+def add_animal(request):
+    if request.method == 'POST':
+        animal_id = request.POST.get('animal_id')
+
+        if animal_id:
+            animal = Animal(animal_id=animal_id, timestamp=timezone.now())
+            animal.save()
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False})
+
+    return JsonResponse({'success': False})
+
+
+def indexw(request):
+    return render(request, 'indexw.html')
