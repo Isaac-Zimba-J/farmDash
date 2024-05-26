@@ -10,14 +10,15 @@
     <div class="container" >
         <div class="row">
           <div class="col-sm">
+            
             <div class="card border-success mb-3" style="max-width: 18rem;">
                 <div class="card-header">ID: 9836</div>
                 <div class="card-body text-success">
                     <p>
-                        <h6 class="card-title">Volume: 2,342 ml</h6>
-                        <h6 class="card-title">Conductivity: 0.5 mS/cm</h6>
+                        <h6 class="card-title">Volume: {{ volume }}  ml</h6>
+                        <h6 class="card-title">Conductivity: {{ conductivity }} mS/cm</h6>
                     </p>
-                    <footer class="blockquote-footer"><cite title="Source Title">Potential mastitis</cite></footer>
+                    <footer class="blockquote-footer"><cite title="Source Title">{{ flagged_message|default:"All good" }}</cite></footer>
                 </div>
               </div>
           </div>
