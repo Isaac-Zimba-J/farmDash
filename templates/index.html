@@ -1,52 +1,87 @@
-<!-- templates extensions-->
+<!-- index.html -->
+
 {% extends 'base.html' %}
 {% block title %}HOME{% endblock %}
 
-{% include 'navbar.html'   %}
+{% include 'navbar.html' %}
 
 {% block content %}
 <div class="container">
     <br>
-    <div class="container" >
+    <div class="container">
         <div class="row">
-          <div class="col-sm">
-            
-            <div class="card border-success mb-3" style="max-width: 18rem;">
-                <div class="card-header">ID: 9836</div>
-                <div class="card-body text-success">
-                    <p>
-                        <h6 class="card-title">Volume: {{ volume }}  ml</h6>
-                        <h6 class="card-title">Conductivity: {{ conductivity }} mS/cm</h6>
-                    </p>
-                    <footer class="blockquote-footer"><cite title="Source Title">{{ flagged_message|default:"All good" }}</cite></footer>
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="card border-success" style="max-width: 100%;">
+                    <div class="card-header">ID: 9836</div>
+                    <div class="card-body text-success">
+                        <p>
+                            <h6 class="card-title">Volume: <span id="volume1">{{ volume }}</span> ml</h6>
+                            <h6 class="card-title">Conductivity: <span id="conductivity1">{{ conductivity }}</span> mS/cm</h6>
+                        </p>
+                        <footer class="blockquote-footer">
+                            <cite title="Source Title"><span id="flagged_message1">{{ flagged_message|default:"All good" }}</span></cite>
+                        </footer>
+                    </div>
                 </div>
-              </div>
-          </div>
-          <div class="col-sm">
-            <div class="card border-primary mb-3" style="max-width: 18rem;">
-                <div class="card-header">ID : 43hs3</div>
-                <div class="card-body text-primary">
-                    <p>
-                        <h6 class="card-title">Volume: 2,342 ml</h6>
-                        <h6 class="card-title">Conductivity: 0.5 mS/cm</h6>
-                    </p>
-                    <footer class="blockquote-footer"> <cite title="Source Title">Healthy</cite></footer>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="card border-primary" style="max-width: 100%;">
+                    <div class="card-header">ID: 9836</div>
+                    <div class="card-body text-primary">
+                        <p>
+                            <h6 class="card-title">Volume: <span id="volume1">23</span> ml</h6>
+                            <h6 class="card-title">Conductivity: <span id="conductivity1">32</span> mS/cm</h6>
+                        </p>
+                        <footer class="blockquote-footer">
+                            <cite title="Source Title"><span id="flagged_message1">{{ flagged_message|default:"All good" }}</span></cite>
+                        </footer>
+                    </div>
                 </div>
-              </div>
-          </div>
-          <div class="col-sm">
-            <div class="card border-danger mb-3" style="max-width: 18rem;">
-                <div class="card-header">ID: 98709 </div>
-                <div class="card-body text-danger">
-                    <p>
-                        <h6 class="card-title">Volume: 2,342 ml</h6>
-                        <h6 class="card-title">Conductivity: 0.5 mS/cm</h6>
-                    </p>
-                    <footer class="blockquote-footer"><cite title="Source Title">Potential mastitis</cite></footer>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="card border-danger" style="max-width: 100%;">
+                    <div class="card-header">ID: 9836</div>
+                    <div class="card-body text-danger">
+                        <p>
+                            <h6 class="card-title">Volume: <span id="volume1">6781</span> ml</h6>
+                            <h6 class="card-title">Conductivity: <span id="conductivity1">098</span> mS/cm</h6>
+                        </p>
+                        <footer class="blockquote-footer">
+                            <cite title="Source Title"><span id="flagged_message1">{{ flagged_message|default:"All good" }}</span></cite>
+                        </footer>
+                    </div>
                 </div>
-              </div>
-          </div>
+            </div>
         </div>
-      </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block extra_js_scripts %}
+<!-- Add this script to your HTML template -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
+<script>
+    function fetchDataAndUpdateUI() {
+        // Send an AJAX request to fetch data
+        $.ajax({
+            url: '/fetch_data/',  // URL to fetch data from the server
+            method: 'GET',
+            success: function(response) {
+                // Update UI with the received data
+                $('#volume1').text(response.volume);
+                $('#conductivity1').text(response.conductivity);
+                $('#flagged_message1').text(response.flagged_message);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
+
+    // Call the function initially and then set an interval to call it every 2 seconds
+    $(document).ready(function() {
+        fetchDataAndUpdateUI();
+        setInterval(fetchDataAndUpdateUI, 2000);
+    });
+</script>
 {% endblock %}
