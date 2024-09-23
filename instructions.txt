@@ -1,12 +1,31 @@
 
+1. install libraries
+pip install -r requirements.txt
 
-to run
-this is after you installed reddis
+2. make migrations
+python3 manage.py makemigrations
 
-sudo service redis-server start
+3. migrate
+python3 manage.py migrate
+
+4. create superuser
+python3 manage.py createsuperuser
+
+5. start the redis server and celery
+// open a new terminal
+// navigate to the project folder and run the following commands
+// you need to have the redis server installed for this
+// you need to have celery installed for this
+// you need to have django installed for this
+// you need to have python installed for this
+
+service redis-server start
 
 celery -A farmDash worker -l info
 
 python3 manage.py runserver
 
 celery -A farmDash beat -l info
+
+6. open the browser and navigate to the following url
+http://127.0.0.1:8000/admin
