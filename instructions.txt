@@ -1,0 +1,12 @@
+
+
+to run
+this is after you installed reddis
+
+sudo service redis-server start
+
+celery -A farmDash worker -l info
+
+python3 manage.py runserver
+
+celery -A farmDash beat -l info
